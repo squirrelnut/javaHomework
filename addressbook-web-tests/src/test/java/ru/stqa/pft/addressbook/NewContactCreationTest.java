@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook;
 
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -19,13 +20,18 @@ public class NewContactCreationTest {
     
     @BeforeMethod
     public void setUp() throws Exception {
-        wd = new FirefoxDriver();
+        // По старой схеме (бразуер ESR 52)
+        wd = new FirefoxDriver(new FirefoxOptions()
+                .setLegacy(true)
+                .setBinary("C:/Program Files/Mozilla Firefox ESR/firefox.exe"));
+
+        System.out.println(((HasCapabilities) wd).getCapabilities()); // Печать в консоль настроек.
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    }
-    
-    @Test
-    public void NewContactCreationTest() {
         wd.get("http://localhost/addressbook/edit.php");
+        login();
+    }
+
+    private void login() {
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
         wd.findElement(By.name("user")).sendKeys("admin");
@@ -34,7 +40,21 @@ public class NewContactCreationTest {
         wd.findElement(By.name("pass")).clear();
         wd.findElement(By.name("pass")).sendKeys("secret");
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-        wd.findElement(By.linkText("add new")).click();
+    }
+
+    @Test
+    public void NewContactCreationTest() {
+
+        gotoAddNew();
+        fillNewContactForm();
+        submitNewContactCreation();
+    }
+
+    private void submitNewContactCreation() {
+        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+    }
+
+    private void fillNewContactForm() {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
         wd.findElement(By.name("firstname")).sendKeys("Ivan");
@@ -53,9 +73,12 @@ public class NewContactCreationTest {
         wd.findElement(By.name("email")).click();
         wd.findElement(By.name("email")).clear();
         wd.findElement(By.name("email")).sendKeys("mail@mail.com");
-        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
-    
+
+    private void gotoAddNew() {
+        wd.findElement(By.linkText("add new")).click();
+    }
+
     @AfterMethod
     public void tearDown() {
         wd.quit();
