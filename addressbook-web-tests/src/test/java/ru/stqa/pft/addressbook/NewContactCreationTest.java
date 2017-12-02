@@ -38,11 +38,11 @@ public class NewContactCreationTest {
     }
 
     @Test
-    public void NewContactCreationTest() {
+    public void testNewContactCreation() {
 
         gotoAddNew();
         fillNewContactForm(new NewContactData(
-                "Petr", 
+                "Petr",
                 "Petrov",
                 "Moscow",
                 "8-495-123-45-68",
