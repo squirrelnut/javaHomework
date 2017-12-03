@@ -35,4 +35,8 @@ public class ContactHelper extends HelperBase {
 
 
     }
+
+    public void clickDeleteContact() {
+        wd.findElement(By.xpath("//div[@id='content']/form[2]/input[2]")).click();
+    }
 }
