@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -9,22 +8,16 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-    FirefoxDriver wd;
+    FirefoxDriver wd; // обявляем драйвер
 
+    // объявляем делегатов
     private ContactHelper contactHelper;
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
 
-    public static boolean isAlertPresent(FirefoxDriver wd) {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
-    }
 
+    // инициализируем браузер
     public void init() {
         wd = new FirefoxDriver(new FirefoxOptions()
                 .setLegacy(true)
@@ -32,20 +25,26 @@ public class ApplicationManager {
 
         System.out.println(((HasCapabilities) wd).getCapabilities()); // Печать в консоль настроек.
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+
+        // Открываем страницу
         wd.get("http://localhost/addressbook/");
+
+        // Инициализируем делегатов
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         contactHelper = new ContactHelper(wd);
         sessionHelper = new SessionHelper(wd);
+
+        // логинимся
         sessionHelper.login("admin", "secret");
     }
 
-
-
+    // выход
     public void stop() {
         wd.quit();
     }
 
+    // геттеры делегатов
     public GroupHelper getGroupHelper() {
         return groupHelper;
     }
@@ -56,5 +55,16 @@ public class ApplicationManager {
 
     public ContactHelper getContactHelper() {
         return contactHelper;
+    }
+
+
+    // какая-то функция... (не используется в тестах)
+    public static boolean isAlertPresent(FirefoxDriver wd) {
+        try {
+            wd.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
+        }
     }
 }

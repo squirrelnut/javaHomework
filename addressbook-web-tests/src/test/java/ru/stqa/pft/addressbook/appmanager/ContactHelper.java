@@ -9,27 +9,17 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
+    // метод для заполнения полей нового контакта
     public void fillNewContactForm(NewContactData newContactData) {
-        wd.findElement(By.name("firstname")).click();
-        wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys(newContactData.getName());
-        wd.findElement(By.name("lastname")).click();
-        wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys(newContactData.getLastName());
-        wd.findElement(By.name("address")).click();
-        wd.findElement(By.name("address")).clear();
-        wd.findElement(By.name("address")).sendKeys(newContactData.getAddress());
-        wd.findElement(By.name("home")).click();
-        wd.findElement(By.name("home")).clear();
-        wd.findElement(By.name("home")).sendKeys(newContactData.getHomePhoneNumber());
-        wd.findElement(By.name("mobile")).click();
-        wd.findElement(By.name("mobile")).clear();
-        wd.findElement(By.name("mobile")).sendKeys(newContactData.getMobilePhoneNumber());
-        wd.findElement(By.name("email")).click();
-        wd.findElement(By.name("email")).clear();
-        wd.findElement(By.name("email")).sendKeys(newContactData.getEmail());
+        type(By.name("firstname"), newContactData.getName());
+        type(By.name("lastname"), newContactData.getLastName());
+        type(By.name("address"), newContactData.getAddress());
+        type(By.name("home"), newContactData.getHomePhoneNumber());
+        type(By.name("mobile"), newContactData.getMobilePhoneNumber());
+        type(By.name("email"), newContactData.getEmail());
     }
 
+    // метод нажатия на кнопку создания нового контакта
     public void submitNewContactCreation() {
         wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
