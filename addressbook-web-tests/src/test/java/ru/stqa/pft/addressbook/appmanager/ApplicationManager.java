@@ -8,7 +8,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-    FirefoxDriver wd; // обявляем драйвер
+    public FirefoxDriver wd; // обявляем драйвер
 
     // объявляем делегатов
     private ContactHelper contactHelper;

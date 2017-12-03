@@ -24,19 +24,28 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
 
+    // нажать на иконку карандаша в строке первого по спику контакта
     public void clickModificationContact() {
-
         wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img")).click();
-
     }
 
+    // нажать на кнопку update изменений на экране модификации контакта
     public void submitModificationContact() {
         wd.findElement(By.xpath("//div[@id='content']/form[1]/input[22]")).click();
-
-
     }
 
+    // нажатие на кнопку delete в окнце модификации контакта
     public void clickDeleteContact() {
         wd.findElement(By.xpath("//div[@id='content']/form[2]/input[2]")).click();
+    }
+
+    // выбор первого чекбокса из списка контактов
+    public void selektChekboxContact() {
+        click(By.name("selected[]"));
+    }
+
+    // нажать на кнопку delete из списка контактов
+    public void deleteContact() {
+        wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
     }
 }
