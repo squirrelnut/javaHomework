@@ -22,11 +22,12 @@ public class ContactHelper extends HelperBase {
         type(By.name("mobile"), newContactData.getMobilePhoneNumber());
         type(By.name("email"), newContactData.getEmail());
 
-        if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(newContactData.getGroup());
-        } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
+        // закомментирован код так как нет группы у удаленных контактов
+//        if (creation) {
+//            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(newContactData.getGroup());
+//        } else {
+//            Assert.assertFalse(isElementPresent(By.name("new_group")));
+//        }
     }
 
     // метод нажатия на кнопку создания нового контакта
@@ -57,5 +58,14 @@ public class ContactHelper extends HelperBase {
     // нажать на кнопку delete из списка контактов
     public void deleteContact() {
         wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
+    }
+
+    public void createContact(NewContactData contact, boolean b) {
+        fillNewContactForm(contact, b);
+        submitNewContactCreation();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
     }
 }
