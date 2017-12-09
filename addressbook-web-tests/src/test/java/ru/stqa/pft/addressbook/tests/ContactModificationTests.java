@@ -16,7 +16,8 @@ public class ContactModificationTests extends TestBase {
                 "Moscow",
                 "8-495-123-45-68",
                 "8-900-123-45-68",
-                "mail1@mail.com"));
+                "mail1@mail.com",
+                null), false);
         app.getContactHelper().submitModificationContact();
 
     }
