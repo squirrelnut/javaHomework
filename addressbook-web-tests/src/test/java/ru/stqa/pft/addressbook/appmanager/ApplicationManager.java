@@ -29,11 +29,11 @@ public class ApplicationManager {
 
     // инициализируем браузер
     public void init() {
-        if (browser == org.openqa.selenium.remote.BrowserType.FIREFOX) {
+        if (browser.equals(org.openqa.selenium.remote.BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
-        } else  if (browser == org.openqa.selenium.remote.BrowserType.CHROME) {
+        } else  if (browser.equals(org.openqa.selenium.remote.BrowserType.CHROME)) {
             wd = new ChromeDriver();
-        } else if (browser == org.openqa.selenium.remote.BrowserType.IE) {
+        } else if (browser.equals(org.openqa.selenium.remote.BrowserType.IE)) {
             wd = new InternetExplorerDriver();
         }
 
