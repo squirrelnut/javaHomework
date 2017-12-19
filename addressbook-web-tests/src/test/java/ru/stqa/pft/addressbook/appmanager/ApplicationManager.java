@@ -44,7 +44,7 @@ public class ApplicationManager {
         System.out.println(((HasCapabilities) wd).getCapabilities()); // Печать в консоль настроек.
 
 
-        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         // Открываем страницу
         wd.get("http://localhost/addressbook/");

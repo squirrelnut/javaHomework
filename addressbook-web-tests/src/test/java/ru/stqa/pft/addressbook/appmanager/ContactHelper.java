@@ -3,10 +3,15 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.NewContactData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
     public ContactHelper(WebDriver wd) {
@@ -36,8 +41,8 @@ public class ContactHelper extends HelperBase {
     }
 
     // нажать на иконку карандаша в строке первого по спику контакта
-    public void clickModificationContact() {
-        wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img")).click();
+    public void clickModificationContact(int index) {
+        wd.findElements(By.cssSelector("tr[name='entry'] td:nth-child(8)")).get(index).click();
     }
 
     // нажать на кнопку update изменений на экране модификации контакта
@@ -51,13 +56,13 @@ public class ContactHelper extends HelperBase {
     }
 
     // выбор первого чекбокса из списка контактов
-    public void selektChekboxContact() {
-        click(By.name("selected[]"));
+    public void selektChekboxContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     // нажать на кнопку delete из списка контактов
     public void deleteContact() {
-        wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
+        wd.findElement(By.cssSelector("input[value='Delete']")).click();
     }
 
     public void createContact(NewContactData contact, boolean b) {
@@ -67,5 +72,17 @@ public class ContactHelper extends HelperBase {
 
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
+    }
+
+    public List<NewContactData> getContactList() {
+        List<NewContactData> contacts = new ArrayList<NewContactData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
+        for (WebElement element : elements) {
+            String lastName = element.findElement(By.cssSelector("td:nth-child(2)")).getAttribute("textContent");
+            String name = element.findElement(By.cssSelector("td:nth-child(3)")).getAttribute("textContent");
+            NewContactData contact = new NewContactData(lastName, name);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
