@@ -2,7 +2,6 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
 import java.util.Comparator;
@@ -15,7 +14,7 @@ public class ContactCreationTest extends TestBase {
         // получаем список всех контактов на странице
         List<NewContactData> before = app.getContactHelper().getContactList();
         // перешли на страницу создания нового контакта
-        app.getNavigationHelper().gotoAddNew();
+        app.goTo().gotoAddNew();
         // создаем экземпляр класса NewContactData
         NewContactData contact = new NewContactData("Sidorov","Sidor");
         // создаем новый контакт с данными см. строчку выше в адресбуке

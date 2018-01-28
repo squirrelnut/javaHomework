@@ -25,8 +25,6 @@ public class ApplicationManager {
         this.browser = browser;
     }
 
-
-
     // инициализируем браузер
     public void init() {
         if (browser.equals(org.openqa.selenium.remote.BrowserType.FIREFOX)) {
@@ -65,11 +63,11 @@ public class ApplicationManager {
     }
 
     // геттеры делегатов
-    public GroupHelper getGroupHelper() {
+    public GroupHelper group() {
         return groupHelper;
     }
 
-    public NavigationHelper getNavigationHelper() {
+    public NavigationHelper goTo() {
         return navigationHelper;
     }
 

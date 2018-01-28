@@ -13,10 +13,10 @@ public class ContactModificationTests extends TestBase {
     @Test
     public void testContactModification () {
         // Перешли на страницу с контактами
-        app.getNavigationHelper().gotoHome();
+        app.goTo().gotoHome();
         // Проверяем предусловие (если ни одного контакта нет, то создаем его)
         if (! app.getContactHelper().isThereAContact()) {
-            app.getNavigationHelper().gotoAddNew();
+            app.goTo().gotoAddNew();
 //            app.getContactHelper().createContact(new NewContactData(
 //                    "Petr",
 //                    "Petrov",
@@ -28,7 +28,7 @@ public class ContactModificationTests extends TestBase {
             app.getContactHelper().createContact(new NewContactData(
                     "Petr",
                     "Petrov"), true);
-            app.getNavigationHelper().gotoHome();
+            app.goTo().gotoHome();
         }
 
         // получаем список всех контактов на странице

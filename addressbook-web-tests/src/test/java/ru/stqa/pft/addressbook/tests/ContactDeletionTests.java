@@ -12,9 +12,9 @@ public class ContactDeletionTests extends TestBase {
 
     @Test
     public void testDeletionTests() {
-        app.getNavigationHelper().gotoHome();
+        app.goTo().gotoHome();
         if (!app.getContactHelper().isThereAContact()) {
-            app.getNavigationHelper().gotoAddNew();
+            app.goTo().gotoAddNew();
             app.getContactHelper().createContact(new NewContactData(
                     "Petr",
                     "Petrov"), true);
@@ -25,7 +25,7 @@ public class ContactDeletionTests extends TestBase {
         app.getContactHelper().deleteContact();
         app.wd.switchTo().alert().accept();
         // возвращаемя на страницу с контактами
-        app.getNavigationHelper().gotoHome();
+        app.goTo().gotoHome();
         // ждем пока таблица с контактами загрузится
         pause(10000);
         // заново получаем список контактов на странице списка всех контактов
